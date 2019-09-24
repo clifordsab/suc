@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "monospace:pixelsize=11:antialias=true:autohint=true";
+static char *font = "Consolas:size=9";
 static int borderpx = 25;
 
 /*
@@ -185,7 +185,6 @@ MouseKey mkeys[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
-#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -198,11 +197,11 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_KP_Enter,    zoomreset,      {.f =  0} },
 	{ MODKEY,               XK_y,           clipcopy,       {.i =  0} },
 	{ MODKEY,               XK_p,           clippaste,      {.i =  0} },
-	{ MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
-	{ MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
-	{ MODKEY|ShiftMask,     XK_Up,          kscrollup,      {.i = -1} },
-	{ MODKEY|ShiftMask,     XK_Down,        kscrolldown,    {.i = -1} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
+	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
+	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
+	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
 	{ MODKEY,               XK_Escape,      keyboard_select,{ 0 } },
 };
 
