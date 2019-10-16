@@ -11,12 +11,3 @@ index 0422421..e00d930 100644
  }
  
  void
-@@ -644,7 +646,7 @@ brelease(XEvent *e)
- 	}
- 
- 	if (e->xbutton.button == Button2)
--		selpaste(NULL);
-+		clippaste(NULL);
- 	else if (e->xbutton.button == Button1)
- 		mousesel(e, 1);
- }
