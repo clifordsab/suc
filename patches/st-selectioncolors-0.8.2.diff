@@ -8,8 +8,8 @@ index 0e01717..fbbb2a4 100644
  static unsigned int defaultrcs = 257;
 +
 +/* Colors used for selection */
-+unsigned int selectionbg = 257;
-+unsigned int selectionfg = 7;
++unsigned int selectionbg = 8;
++unsigned int selectionfg = 15;
  
  /*
   * Default shape of cursor

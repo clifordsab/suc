@@ -122,7 +122,7 @@ static unsigned int defaultcs = 15;
 static unsigned int defaultrcs = 256;
 
 /* Colors used for selection */
-unsigned int selectionbg = 257;
+unsigned int selectionbg = 8;
 unsigned int selectionfg = 15;
 
 /*
@@ -174,6 +174,7 @@ static MouseShortcut mshortcuts[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
+#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -190,6 +191,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
 	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
 	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
+	{ MODKEY,               XK_Insert,      selpaste,       {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
 };
 
