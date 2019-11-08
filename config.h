@@ -111,6 +111,7 @@ static const char *colorname[] = {
 	"#2e3440",
 };
 
+
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
@@ -136,8 +137,9 @@ static unsigned int cursorshape = 2;
 /*
  * Default columns and rows numbers
  */
+
 static unsigned int cols = 80;
-static unsigned int rows = 53;
+static unsigned int rows = 24;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -186,6 +188,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_KP_Enter,    zoomreset,      {.f =  0} },
 	{ MODKEY,               XK_y,           clipcopy,       {.i =  0} },
 	{ MODKEY,               XK_p,           clippaste,      {.i =  0} },
+	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
 	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
