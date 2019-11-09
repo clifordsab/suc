@@ -14,14 +14,14 @@ index 877afab..6a1699f 100644
 -	"magenta3",
 -	"cyan3",
 -	"gray90",
-+	"#282a2e", /* black   */
-+	"#a54242", /* red     */
-+	"#8c9440", /* green   */
-+	"#de935f", /* yellow  */
-+	"#5f819d", /* blue    */
-+	"#85678f", /* magenta */
-+	"#5e8d87", /* cyan    */
-+	"#707880", /* white   */
++	"#282a2e",
++	"#a54242",
++	"#8c9440",
++	"#de935f",
++	"#5f819d",
++	"#85678f",
++	"#5e8d87",
++	"#707880",
  
  	/* 8 bright colors */
 -	"gray50",
@@ -32,14 +32,14 @@ index 877afab..6a1699f 100644
 -	"magenta",
 -	"cyan",
 -	"white",
-+	"#373b41", /* black   */
-+	"#cc6666", /* red     */
-+	"#b5bd68", /* green   */
-+	"#f0c674", /* yellow  */
-+	"#81a2be", /* blue    */
-+	"#b294bb", /* magenta */
-+	"#8abeb7", /* cyan    */
-+	"#c5c8c6", /* white   */
++	"#373b41",
++	"#cc6666",
++	"#b5bd68",
++	"#f0c674",
++	"#81a2be",
++	"#b294bb",
++	"#8abeb7",
++	"#c5c8c6",
  
  	[255] = 0,
  
@@ -49,8 +49,8 @@ index 877afab..6a1699f 100644
 +	"#000000",
 +	"#c5c8c6",
  };
--
  
+-
  /*
   * Default colors (colorname index)
   * foreground, background, cursor, reverse cursor
