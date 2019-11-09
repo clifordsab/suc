@@ -2,7 +2,7 @@ diff --git a/config.def.h b/config.def.h
 index 877afab..6a1699f 100644
 --- a/config.def.h
 +++ b/config.def.h
-@@ -84,41 +84,41 @@ static unsigned int tabspaces = 8;
+@@ -84,41 +84,40 @@ static unsigned int tabspaces = 8;
  /* Terminal colors (16 first used in escape sequence) */
  static const char *colorname[] = {
  	/* 8 normal colors */
@@ -47,9 +47,9 @@ index 877afab..6a1699f 100644
 -	"#cccccc",
 -	"#555555",
 +	"#000000",
-+	"#2e3440",
++	"#c5c8c6",
  };
- 
+-
  
  /*
   * Default colors (colorname index)
@@ -59,10 +59,10 @@ index 877afab..6a1699f 100644
 -unsigned int defaultbg = 0;
 -static unsigned int defaultcs = 256;
 -static unsigned int defaultrcs = 257;
-+unsigned int defaultfg = 15;
++unsigned int defaultfg = 257;
 +unsigned int defaultbg = 256;
-+static unsigned int defaultcs = 15;
++static unsigned int defaultcs = 257;
 +static unsigned int defaultrcs = 256;
  
- /* Colors used for selection */
- unsigned int selectionbg = 8;
+ /*
+  * Default shape of cursor

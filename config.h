@@ -85,44 +85,40 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"#282a2e", /* black   */
-	"#a54242", /* red     */
-	"#8c9440", /* green   */
-	"#de935f", /* yellow  */
-	"#5f819d", /* blue    */
-	"#85678f", /* magenta */
-	"#5e8d87", /* cyan    */
-	"#707880", /* white   */
+	"#282a2e",
+	"#a54242",
+	"#8c9440",
+	"#de935f",
+	"#5f819d",
+	"#85678f",
+	"#5e8d87",
+	"#707880",
 
 	/* 8 bright colors */
-	"#373b41", /* black   */
-	"#cc6666", /* red     */
-	"#b5bd68", /* green   */
-	"#f0c674", /* yellow  */
-	"#81a2be", /* blue    */
-	"#b294bb", /* magenta */
-	"#8abeb7", /* cyan    */
-	"#c5c8c6", /* white   */
+	"#373b41",
+	"#cc6666",
+	"#b5bd68",
+	"#f0c674",
+	"#81a2be",
+	"#b294bb",
+	"#8abeb7",
+	"#c5c8c6",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#000000",
-	"#2e3440",
+	"#c5c8c6",
 };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 15;
+unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
-static unsigned int defaultcs = 15;
+static unsigned int defaultcs = 257;
 static unsigned int defaultrcs = 256;
-
-/* Colors used for selection */
-unsigned int selectionbg = 8;
-unsigned int selectionfg = 15;
 
 /*
  * Default shape of cursor
@@ -138,7 +134,7 @@ static unsigned int cursorshape = 2;
  */
 
 static unsigned int cols = 80;
-static unsigned int rows = 52;
+static unsigned int rows = 24;
 
 /*
  * Default colour and shape of the mouse cursor
@@ -175,6 +171,7 @@ static MouseShortcut mshortcuts[] = {
 
 /* Internal keyboard shortcuts. */
 #define MODKEY Mod1Mask
+#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -182,17 +179,16 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ MODKEY,               XK_KP_Add,      zoom,           {.f = +1} },
-	{ MODKEY,               XK_KP_Subtract, zoom,           {.f = -1} },
-	{ MODKEY,               XK_KP_Enter,    zoomreset,      {.f =  0} },
-	{ MODKEY,               XK_y,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_p,           clippaste,      {.i =  0} },
+	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
+	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
+	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
+	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
-	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_k,           kscrollup,      {.i =  1} },
-	{ MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
-	{ MODKEY,               XK_u,           kscrollup,      {.i = -1} },
-	{ MODKEY,               XK_d,           kscrolldown,    {.i = -1} },
+	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
