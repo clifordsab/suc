@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Consolas:size=9";
-static int borderpx = 25;
+static int borderpx = 50;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -134,7 +134,7 @@ static unsigned int cursorshape = 2;
  */
 
 static unsigned int cols = 80;
-static unsigned int rows = 52;
+static unsigned int rows = 48;
 
 /*
  * Default colour and shape of the mouse cursor
