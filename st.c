@@ -142,7 +142,7 @@ typedef struct {
 /* ESC '[' [[ [<priv>] <arg> [;]] <mode> [<mode>]] */
 typedef struct {
 	char buf[ESC_BUF_SIZ]; /* raw string */
-	size_t len;            /* raw string length */
+	int len;               /* raw string length */
 	char priv;
 	int arg[ESC_ARG_SIZ];
 	int narg;              /* nb of args */
@@ -153,9 +153,8 @@ typedef struct {
 /* ESC type [[ [<priv>] <arg> [;]] <mode>] ESC '\' */
 typedef struct {
 	char type;             /* ESC type ... */
-	char *buf;             /* allocated raw string */
-	size_t siz;            /* allocation size */
-	size_t len;            /* raw string length */
+	char buf[STR_BUF_SIZ]; /* raw string */
+	int len;               /* raw string length */
 	char *args[STR_ARG_SIZ];
 	int narg;              /* nb of args */
 } STREscape;
@@ -374,7 +373,7 @@ char
 base64dec_getc(const char **src)
 {
 	while (**src && !isprint(**src)) (*src)++;
-	return **src ? *((*src)++) : '=';  /* emulate padding if string ends */
+	return *((*src)++);
 }
 
 char *
@@ -391,10 +390,6 @@ base64dec(const char *src)
 		int b = base64_digits[(unsigned char) base64dec_getc(&src)];
 		int c = base64_digits[(unsigned char) base64dec_getc(&src)];
 		int d = base64_digits[(unsigned char) base64dec_getc(&src)];
-
-		/* invalid input. 'a' can be -1, e.g. if src is "\n" (c-str) */
-		if (a == -1 || b == -1)
-			break;
 
 		*dst++ = (a << 2) | ((b & 0x30) >> 4);
 		if (c == -1)
@@ -1869,7 +1864,7 @@ csihandle(void)
 void
 csidump(void)
 {
-	size_t i;
+	int i;
 	uint c;
 
 	fprintf(stderr, "ESC[");
@@ -1987,7 +1982,7 @@ strparse(void)
 void
 strdump(void)
 {
-	size_t i;
+	int i;
 	uint c;
 
 	fprintf(stderr, "ESC%c", strescseq.type);
@@ -2014,10 +2009,7 @@ strdump(void)
 void
 strreset(void)
 {
-	strescseq = (STREscape){
-		.buf = xrealloc(strescseq.buf, STR_BUF_SIZ),
-		.siz = STR_BUF_SIZ,
-	};
+	memset(&strescseq, 0, sizeof(strescseq));
 }
 
 void
@@ -2399,7 +2391,7 @@ tputc(Rune u)
 		if (term.esc&ESC_DCS && strescseq.len == 0 && u == 'q')
 			term.mode |= MODE_SIXEL;
 
-		if (strescseq.len+len >= strescseq.siz) {
+		if (strescseq.len+len >= sizeof(strescseq.buf)-1) {
 			/*
 			 * Here is a bug in terminals. If the user never sends
 			 * some code to stop the str or esc command, then st
@@ -2413,10 +2405,7 @@ tputc(Rune u)
 			 * term.esc = 0;
 			 * strhandle();
 			 */
-			if (strescseq.siz > (SIZE_MAX - UTF_SIZ) / 2)
-				return;
-			strescseq.siz *= 2;
-			strescseq.buf = xrealloc(strescseq.buf, strescseq.siz);
+			return;
 		}
 
 		memmove(&strescseq.buf[strescseq.len], c, len);
