@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Consolas:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Consolas:size=9";
 static int borderpx = 50;
 
 /*
@@ -134,7 +134,7 @@ static unsigned int cursorshape = 2;
  */
 
 static unsigned int cols = 80;
-static unsigned int rows = 24;
+static unsigned int rows = 48;
 
 /*
  * Default colour and shape of the mouse cursor
